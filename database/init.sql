@@ -3,7 +3,7 @@ CREATE TABLE raw_data (
     SURNAME TEXT,
     ECG REAL,
     EDA REAL,
-    RESP REAL,
+    RSP REAL,
     TIME TEXT
 );
 

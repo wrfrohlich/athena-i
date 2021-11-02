@@ -18,7 +18,7 @@ from datetime import datetime
 class Logs():
     def __init__(self):
         logging.basicConfig(level=logging.INFO,
-                            filename="/var/log/athena-i.log",
+                            filename="/var/log/athena-i/athena-i.log",
                             filemode="a+",
                             format="%(asctime)-15s :: %(message)s")
 

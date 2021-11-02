@@ -10,6 +10,7 @@
 #
 #---------------------------------------------------------------------------------------
 
+import sys
 import math
 import numpy as np
 import pandas as pd
@@ -30,7 +31,7 @@ class PredictionOnline():
         x_train = pd.read_csv("/etc/athena-i/training/train-x", delimiter=';')
         x_train = x_train.to_numpy()
 
-        y_train = pd.read_csv("/etc/athena-i/training/train-x", delimiter=';')
+        y_train = pd.read_csv("/etc/athena-i/training/train-y", delimiter=';')
         y_train = y_train.to_numpy()
 
         model=DecisionTreeClassifier()

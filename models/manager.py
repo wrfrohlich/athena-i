@@ -111,7 +111,7 @@ class Manager():
 
             if len(eda) != 0:
                 process.eda_process(data_processing, eda)
-                secong_test = len(eda['filtered']) >= 55000
+                second_test = len(eda['filtered']) >= 55000
             else:
                 second_test = False
                 
@@ -122,7 +122,7 @@ class Manager():
                 third_test = False
 
 
-            if first_test and secong_test and third_test:
+            if first_test and second_test and third_test:
                 return process.data_format(ecg, eda, rsp), True
 
         return None, False

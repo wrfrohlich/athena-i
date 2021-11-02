@@ -5,18 +5,18 @@
 #----------------------------------------------------
 #////////// Variables ///////////////////////////////
 #----------------------------------------------------
-LOG=raspbit.log
-REPORT=raspbit
+LOG=athena-i.log
+REPORT=athena-i
 DIR_LOG=/var/log/
-DIR_ETC=/etc/raspbit
+DIR_ETC=/etc/athena-i
 #----------------------------------------------------
 #////////////////////////////////////////////////////
 #----------------------------------------------------
 sudo rm -rf $DIR_ETC $DIR_LOG$LOG $DIR_LOG$REPORT
 #----------------------------------------------------
-crontab -l|sed 's|@reboot sudo python3 /etc/raspbit/api/api.py >> /var/log/raspbit.log/api.log &||i'|crontab -
+crontab -l|sed 's|@reboot sudo python3 /etc/athena-i/api/api.py >> /var/log/athena-i.log/api.log &||i'|crontab -
 #----------------------------------------------------
-crontab -l|sed 's|@reboot sudo python3 /etc/raspbit/models/receive.py >> /var/log/raspbit.log/receive.log &||i'|crontab -
+crontab -l|sed 's|@reboot sudo python3 /etc/athena-i/models/manager.py >> /var/log/athena-i.log/manager.log &||i'|crontab -
 #----------------------------------------------------
 #////////////////////////////////////////////////////
 #----------------------------------------------------

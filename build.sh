@@ -25,14 +25,15 @@ DIR_ETC=/etc/athena-i
 DIR_ROOT=/root/athena-i
 DIR_API=/etc/athena-i/api/
 DIR_NGINX=/etc/athena-i/nginx/
+DIR_PRED=/etc/athena-i/prediction/
 DIR_ACQUISITION=/etc/athena-i/acquisition/
 DIR_MODELS=/etc/athena-i/models/
 #----------------------------------------------------
 API_LOG=/api.log
 API_FILE=api.py
 #----------------------------------------------------
-PROCESSING_LOG=/receive.log
-PROCESSING_FILE=receive.py
+PROCESSING_LOG=/manager.log
+PROCESSING_FILE=manager.py
 #----------------------------------------------------
 ACQUISITION_FILE=acquisition
 #----------------------------------------------------
@@ -43,7 +44,7 @@ DIR_NGINX_HTML=/var/www/html/
 DIR_NGINX_DEFAULT=/etc/nginx/conf.d/
 #----------------------------------------------------
 RAW=/raw
-LOG=athena-i.log
+ALERTS=/alerts
 REPORT=athena-i
 DIR_LOG=/var/log/
 #----------------------------------------------------
@@ -53,11 +54,11 @@ sudo mv $DIR_ROOT $DIR_ETC
 #----------------------------------------------------
 #////////// Create Directories //////////////////////
 #----------------------------------------------------
-if [ -e "$DIR_LOG$LOG" ]; then
+if [ -e "$DIR_LOG$REPORT" ]; then
 	echo "Paths exist"
 else
-	sudo mkdir  "$DIR_LOG$LOG" "$DIR_LOG$REPORT" "$DIR_LOG$REPORT$RAW"
-	echo -e "$DIR_LOG$LOG: created\n$DIR_LOG$REPORT: created"
+	sudo mkdir "$DIR_LOG$REPORT" "$DIR_LOG$REPORT$RAW" "$DIR_LOG$REPORT$ALERTS" "$DIR_PRED"
+	echo -e "$DIR_LOG$REPORT: created\n$DIR_PRED: created"
 fi
 #----------------------------------------------------
 #////////////////////////////////////////////////////
@@ -84,7 +85,7 @@ cat /etc/athena-i/database/init.sql | sqlite3 /var/log/athena-i/athena-i.db
 #////////// Install API and Dependencies ////////////
 #----------------------------------------------------
 pip3 install bottle
-crontab -l|sed "\$a@reboot sudo python3 $DIR_API$API_FILE >> $DIR_LOG$LOG$API_LOG &"|crontab -
+crontab -l|sed "\$a@reboot sudo python3 $DIR_API$API_FILE &"|crontab -
 #----------------------------------------------------
 #////////////////////////////////////////////////////
 #----------------------------------------------------
@@ -94,7 +95,7 @@ pip3 install pandas
 pip3 install numpy
 pip3 install biosppy
 pip3 install db-sqlite3
-crontab -l|sed "\$a@reboot sudo python3 $DIR_MODELS$PROCESSING_FILE >> $DIR_LOG$LOG$PROCESSING_LOG &"|crontab -
+crontab -l|sed "\$a@reboot sudo python3 $DIR_MODELS$PROCESSING_FILE &"|crontab -
 #----------------------------------------------------
 #////////////////////////////////////////////////////
 #----------------------------------------------------
