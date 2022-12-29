@@ -1,0 +1,6 @@
+
+bottle=0.12.23
+pandas=1.5.2
+numpy=1.24.1
+biosppy=0.6.1
+db-sqlite3=0.0.1
